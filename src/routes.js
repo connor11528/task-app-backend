@@ -1,29 +1,26 @@
+const api = require('./../api');
 
 const routes = [
   {
     method: 'GET',
-    path: '/',
+    path: '/api',
     handler: (request, h) => {
       return {success: true};
     }
   },
   {
     method: 'GET',
-    path: '/tasks',
-    handler: (request, h) => {
-      //todo: return all tasks
-    }
+    path: '/api/task',
+    options: api.task.all
   },
   {
     method: 'POST',
-    path: '/tasks',
-    handler: (request, h) => {
-      //todo: create a task
-    }
+    path: '/api/task',
+    options: api.task.create
   },
   {
     method: 'GET',
-    path: '/tasks/{task}',
+    path: '/api/task/{task}',
     handler: (request, h) => {
       const task = request.params.task;
 
@@ -32,7 +29,7 @@ const routes = [
   },
   {
     method: 'PUT',
-    path: '/tasks/{task}',
+    path: '/api/task/{task}',
     handler: (request, h) => {
       const task = request.params.task;
       const updates = request.payload;
@@ -42,7 +39,7 @@ const routes = [
   },
   {
     method: 'DELETE',
-    path: '/tasks/{task}',
+    path: '/api/task/{task}',
     handler: (request, h) => {
       const task = request.params.task;
 
