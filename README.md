@@ -3,7 +3,8 @@ Hapi MongoDB starter app with Lab for testing
 
 
 ### Todo
-- create CRUD routes with mongoose
-- Add a frontend
-- add [jsonwebtokens](https://jwt.io/) for authentication
-- Add relationships to users and tasks
+[checkbox:unchecked] Create CRUD routes with mongoose
+[checkbox:unchecked] Add a frontend ([repo here](https://github.com/connor11528/task-app-frontend))
+[checkbox:unchecked] Add [jsonwebtoken](https://jwt.io/) authentication
+[checkbox:unchecked] Add relationships with [mongoose-autopopulate](https://github.com/mongodb-js/mongoose-autopopulate)
+[checkbox:unchecked] Seed data with CSV
