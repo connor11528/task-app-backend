@@ -1,4 +1,4 @@
-const api = require('./../api');
+const api = require('./api');
 
 const routes = [
   {
@@ -21,30 +21,17 @@ const routes = [
   {
     method: 'GET',
     path: '/api/task/{task}',
-    handler: (request, h) => {
-      const task = request.params.task;
-
-      //todo: return the specified task
-    }
+    options: api.task.get
   },
   {
     method: 'PUT',
     path: '/api/task/{task}',
-    handler: (request, h) => {
-      const task = request.params.task;
-      const updates = request.payload;
-
-      //todo: update the task
-    }
+    options: api.task.update
   },
   {
     method: 'DELETE',
     path: '/api/task/{task}',
-    handler: (request, h) => {
-      const task = request.params.task;
-
-      //todo: delete the task
-    }
+    options: api.task.remove
   },
 ];
 
