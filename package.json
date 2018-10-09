@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js",
-    "test": "lab --verbose --assert code --coverage"
+    "test": "lab --verbose --assert code --coverage",
+    "db:seed": "node src/utils/seed.js"
   },
   "author": "",
   "license": "ISC",
