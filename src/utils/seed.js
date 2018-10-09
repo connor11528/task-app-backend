@@ -5,6 +5,16 @@ const {
 // Connect to MongoDB
 require('../utils/database');
 
+async function clearDatabase(){
+	try {
+		console.log('Deleting tasks...');
+		return await Task.deleteMany({});
+	} catch(error){
+		console.log('Error deleting tasks');
+		return false;
+	}
+}
+
 async function seed(){
 
 	const tasks = [
@@ -22,17 +32,26 @@ async function seed(){
       }
     ];
 
+
 	for(let task of tasks){
-		task = await new Task(task);
-		task.save();
+		const newTask = await new Task(task);
+		try {
+			newTask.save();
+		} catch (err){
+			console.log('Error saving task');
+		}
+		
 	}
 
 	return await Task.find({});
 }
 
+// clearDatabase();
 
 // Run the seeder
 seed().then((result) => {
 	console.log(`${result.length} Tasks created!`);
 	console.log('Press Ctrl + C to exit.')	
 });
+
+
