@@ -1,4 +1,4 @@
-Hapi MongoDB starter app with Lab for testing
+Task app with Hapi and MongoDB 
 ===
 
 > This repo is for getting started building a tech stack with core tools like Node.js, Hapi v17 and MongoDB with Mongoose ORM
