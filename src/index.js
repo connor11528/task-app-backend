@@ -5,7 +5,8 @@ require('./utils/database');
 
 const server = Hapi.server({
   port: 3000,
-  host: 'localhost'
+  host: 'localhost',
+  routes: { cors: true }
 });
 
 const startServer = async () => {

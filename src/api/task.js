@@ -5,8 +5,7 @@ const taskApi = {
   all: {
     async handler(request, h) {
       try {
-
-        return await Task.find({});
+        return await Task.find({}).sort({ createdAt: 'desc' });
 
       } catch (err) {
         Boom.badImplementation(err);
@@ -16,11 +15,11 @@ const taskApi = {
   create: {
     async handler(request, h) {
       try {
-
         const task = await new Task({
           name: request.payload.name,
           description: request.payload.description
         });
+        task.save();
 
         return { message: "Task created successfully", task };
 
@@ -32,7 +31,6 @@ const taskApi = {
   get: {
     async handler(request, h) {
       try {
-
         const task = request.params.task;
 
         return await Task.findOne({
@@ -51,6 +49,7 @@ const taskApi = {
         const updates = request.payload;
 
         // todo
+        return { success: true, message: 'Successfully updated task!' };
 
       } catch (err) {
           Boom.badImplementation(err);
@@ -60,9 +59,9 @@ const taskApi = {
   remove: {
     async handler(request, h){
         try {
-            const task = request.params.task;
+            const task = await Task.findById(request.params.task).remove();
 
-            // todo
+            return { success: true, message: 'Successfully removed task!' };
 
         } catch (err) {
             Boom.badImplementation(err);
