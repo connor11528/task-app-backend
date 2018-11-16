@@ -40,6 +40,11 @@ const routes = [
     path: '/api/task/{task}',
     options: api.task.remove
   },
+  {
+    method: 'POST',
+    path: '/api/register',
+    options: api.user.register
+  }
 ];
 
 module.exports = routes;
