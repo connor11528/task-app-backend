@@ -4,16 +4,22 @@ const Boom = require('boom');
 const userApi = {
   register: {
     async handler(request, h) {
-      try {      	
+      try {
+        const { email, password } = request.payload;
 
-      	// Create user
-        const task = await new User({
-          email: request.payload.email,
-          password: request.payload.password
+        const existingUser = await User.findOne({
+          email: email
         });
-        task.save();
 
-        return { message: "Task created successfully", task };
+        if(existingUser) {
+          return Boom.methodNotAllowed('We already have a user with that email');
+        }
+
+        const user = await new User({ email, password });
+
+        user.save();
+
+        return { message: "User created successfully", user };
 
       } catch (err) {
         Boom.badImplementation(err);

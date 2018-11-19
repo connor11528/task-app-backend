@@ -1,20 +1,22 @@
 {
-  "name": "hapi-mongodb-starter",
+  "name": "task-app-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "A task app built with Hapi and Mongoose. Part of a tutorial series",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js",
     "test": "lab --verbose --assert code --coverage",
     "db:seed": "node src/utils/seed.js"
   },
-  "author": "",
+  "author": "Connor Leech",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.2",
+    "bluebird": "^3.5.3",
     "boom": "^7.2.0",
     "glue": "^5.0.0",
     "hapi": "^17.5.4",
-    "mongoose": "^5.2.17"
+    "mongoose": "^5.3.12"
   },
   "devDependencies": {
     "code": "^5.2.0",
