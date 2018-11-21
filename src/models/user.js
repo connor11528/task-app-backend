@@ -20,22 +20,18 @@ const userModel = mongoose.Schema({
 });
 
 userModel.pre('save', function(next) {
-    var user = this;
+  var user = this;
 
-    if (!user.isModified('password')){
-        console.log('user has not modified password');
+  if (!user.isModified('password')){
+    next();
+  }
 
-        return next();
-    }
-
-    utils.hashPassword(this.password)
-        .then((res)=>{
-            console.log('After hashed password');
-            console.log(res);
-        })
-        .catch(e => console.error(e));
-
-
+  utils.hashPassword(this.password)
+    .then((hash)=>{
+      user.password = hash;
+      next();
+    })
+    .catch(e => console.error(e));
 });
 
 module.exports = mongoose.model('User', userModel);

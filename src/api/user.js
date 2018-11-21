@@ -19,7 +19,9 @@ const userApi = {
 
         user.save();
 
-        return { message: "User created successfully", user };
+        utils.sendVerificationEmail(user);
+
+        return { message: "User created successfully. Please check your email", user };
 
       } catch (err) {
         Boom.badImplementation(err);

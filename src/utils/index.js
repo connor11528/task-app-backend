@@ -1,5 +1,7 @@
-const Promise          = require('bluebird');
-const bcrypt           = require('bcrypt');
+const Promise        = require('bluebird');
+const bcrypt         = require('bcrypt');
+const mandrill       = require('mandrill-api/mandrill');
+const mandrillClient = new mandrill.Mandrill(process.env.MANDRILL_API_KEY);
 
 const utils = {
 	hashPassword(password){
@@ -15,6 +17,9 @@ const utils = {
 			});
 		});
 	},
+	sendVerificationEmail(user){
+		// todo: send verification email with mandrill by mailchimp
+	}
 };
 
 module.exports = utils;
