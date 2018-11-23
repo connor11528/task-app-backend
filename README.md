@@ -23,11 +23,6 @@ $ npm run start
 - [ ] Add relationships with [mongoose-autopopulate](https://github.com/mongodb-js/mongoose-autopopulate)
 - [ ] Add [jsonwebtoken](https://jwt.io/) authentication
 
-### Resources
-
-- [Developing RESTful APIs with Hapi](https://auth0.com/blog/developing-restful-apis-with-hapijs/) - Auth0 blog
-
-
 # Tutorial notes 
 
 > If you run into `dyld: lazy symbol binding failed: Symbol not found` error, then running `npm rebuild bcrypt --build-from-source` will fix it.

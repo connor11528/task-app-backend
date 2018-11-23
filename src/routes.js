@@ -9,6 +9,21 @@ const routes = [
     }
   },
   {
+    method: 'POST',
+    path: '/api/register',
+    options: api.user.register
+  },
+  {
+    method: 'GET',
+    path: '/api/confirmation',
+    options: api.user.confirmation
+  },
+  {
+    method: 'POST',
+    path: '/api/login',
+    options: api.user.login
+  },
+  {
     method: 'GET',
     path: '/api/task',
     options: api.task.all
@@ -33,16 +48,6 @@ const routes = [
     path: '/api/task/{task}',
     options: api.task.remove
   },
-  {
-    method: 'POST',
-    path: '/api/register',
-    options: api.user.register
-  },
-  {
-    method: 'POST',
-    path: '/api/login',
-    options: api.user.login
-  }
 ];
 
 module.exports = routes;

@@ -4,7 +4,6 @@ const Boom         = require('boom');
 const jsonwebtoken = require('jsonwebtoken');
 const { User }     = require('./../models');
 
-
 const userApi = {
   register: {
     auth: false,
@@ -33,6 +32,27 @@ const userApi = {
       }
     }
   },
+  confirmation: {
+    auth: false,
+    async handler(request, h) {
+      const token = request.query.token;
+
+      const decodedEmail = jsonwebtoken.verify(token, process.env.SECRET_KEY);
+
+      let user = await User.findOne({
+        email: decodedEmail
+      });
+
+      if(!user || !token){
+        Boom.badRequest('Invalid token');
+      }
+
+      user.set({ active: true });
+      await user.save();
+
+      return { success: true, message: 'Account successfully activated!' };
+    }
+  },
   login: {
     auth: false,
     async handler(request, h) {
@@ -46,8 +66,7 @@ const userApi = {
         }
 
         if(!user.active){
-          // todo: check that they've activated their account
-          // Boom.badRequest('Check your email to activate your account');
+          Boom.badRequest('Your account isn\'t activated yet. Check your email!');
         }
 
         const token = jsonwebtoken.sign(user.email, process.env.SECRET_KEY);

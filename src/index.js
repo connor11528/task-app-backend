@@ -7,13 +7,13 @@ const Boom     = require('boom');
 require('./utils/database');
 
 const server = Hapi.server({
-  port: 3000,
-  host: 'localhost',
+  port: process.env.PORT || 3000,
+  host: process.env.HOST || 'localhost',
   routes: { cors: true }
 });
 
 const validate = async function (decoded, request) {
-  console.log('running validate');
+  console.log('running validate...');
 
   console.log(decoded);
   console.log(request);
