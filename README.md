@@ -32,4 +32,7 @@ $ npm run start
 
 > If you run into `dyld: lazy symbol binding failed: Symbol not found` error, then running `npm rebuild bcrypt --build-from-source` will fix it.
 
-- We use Mandrill by Mailchimp to send transactional email. You'll need a Mailchimp account and to [enable Mandrill](https://mailchimp.com/help/add-or-remove-mandrill/). Login to Mailchimp > Account > Transactional > Add Mandrill. This requires a Mailchimp paid plan, starting at a minimum of $10/month. Learn more about [how Mandrill billing works](https://mandrill.zendesk.com/hc/en-us/articles/205582847-How-Mandrill-Billing-Works)
+- We're using Mailgun because Mandrill is too expensive for what we need right now. No sense paying more than we have to for the same thing!
+
+- If so inclined you can generate a super secure secret key using: `node -e "console.log(require('crypto').randomBytes(256).toString('base64'));"`
+

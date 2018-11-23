@@ -3,6 +3,7 @@ const Boom = require('boom');
 
 const taskApi = {
   all: {
+    auth: false,
     async handler(request, h) {
       try {
         return await Task.find({}).sort({ createdAt: 'desc' });
@@ -13,6 +14,7 @@ const taskApi = {
     }
   },
   create: {
+    auth: 'jwt',
     async handler(request, h) {
       try {
         const task = await new Task({
@@ -29,6 +31,7 @@ const taskApi = {
     }
   },
   get: {
+    auth: false,
     async handler(request, h) {
       try {
         const task = request.params.task;
@@ -43,6 +46,7 @@ const taskApi = {
     }
   },
   update: {
+    auth: 'jwt',
     async handler(request, h) {
       try {
         const task = request.params.task;
@@ -57,6 +61,7 @@ const taskApi = {
     }
   },
   remove: {
+    auth: 'jwt',
     async handler(request, h){
         try {
             const task = await Task.findById(request.params.task).remove();

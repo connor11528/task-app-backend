@@ -17,7 +17,10 @@
     "dotenv": "^6.1.0",
     "glue": "^5.0.0",
     "hapi": "^17.5.4",
-    "mandrill-api": "^1.0.45",
+    "hapi-auth-jwt2": "^8.1.0",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mailgun.js": "^2.0.1",
     "mongoose": "^5.3.12"
   },
   "devDependencies": {
