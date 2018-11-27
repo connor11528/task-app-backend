@@ -1,12 +1,7 @@
 const Promise        = require('bluebird');
 const bcrypt         = require('bcrypt');
 const jsonwebtoken   = require('jsonwebtoken');
-var mailgun          = require('mailgun.js');
-var mg = mailgun.client({
-  username: 'api', 
-	key: process.env.MAILGUN_API_KEY
-});
-
+const emails         = require('./emails');
 
 const utils = {
 	hashPassword(password){
@@ -39,15 +34,17 @@ const utils = {
 		});
 
 	},
-	sendVerificationEmail(user){
-		// todo: send verification email with mailgun
-
+	async sendVerificationEmail(user){
     const token = jsonwebtoken.sign(user.email, process.env.SECRET_KEY);
 
     const verificationUrl = `${process.env.BASE_URL}/confirmation?token=${token}`;
 
-    console.log(verificationUrl);
-	}
+    return await emails.sendEmail(user.email, {
+      subject: 'Activate your account',
+      text: `Please click verification url: ${verificationUrl}`
+    });
+	},
+  
 };
 
 module.exports = utils;

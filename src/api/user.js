@@ -23,7 +23,7 @@ const userApi = {
 
         user.save();
 
-        utils.sendVerificationEmail(user);
+        await utils.sendVerificationEmail(user);
 
         return { message: "User created successfully. Please check your email", user };
 
@@ -59,14 +59,19 @@ const userApi = {
       try {
         const { email, password } = request.payload;
         let user                  = await User.findOne({ email });
-        const passwordMatch       = await utils.comparePassword(password, user.password);
 
-        if(!passwordMatch){
-          return Boom.badRequest('Password does not match');
+        if(!user){
+          return Boom.badRequest('No account with that email');
         }
 
         if(!user.active){
-          Boom.badRequest('Your account isn\'t activated yet. Check your email!');
+          return Boom.badRequest('Your account isn\'t activated yet. Check your email!');
+        }
+
+        const passwordMatch = await utils.comparePassword(password, user.password);
+
+        if(!passwordMatch){
+          return Boom.badRequest('Password does not match');
         }
 
         const token = jsonwebtoken.sign(user.email, process.env.SECRET_KEY);
