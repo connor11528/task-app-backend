@@ -29,5 +29,7 @@ $ npm run start
 
 - We're using Mailgun because Mandrill is too expensive for what we need right now. No sense paying more than we have to for the same thing!
 
+- You'll need to [add a domain](https://app.mailgun.com/app/domains/new) to your mailgun account. 
+
 - If so inclined you can generate a super secure secret key using: `node -e "console.log(require('crypto').randomBytes(256).toString('base64'));"`
 

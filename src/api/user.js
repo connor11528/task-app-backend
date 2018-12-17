@@ -1,4 +1,5 @@
-const _            = require('lodash');
+require('dotenv').config();
+
 const utils        = require('../utils');
 const Boom         = require('boom');
 const jsonwebtoken = require('jsonwebtoken');
@@ -48,6 +49,7 @@ const userApi = {
       }
 
       user.set({ active: true });
+
       await user.save();
 
       return { success: true, message: 'Account successfully activated!' };
@@ -77,6 +79,7 @@ const userApi = {
         const token = jsonwebtoken.sign(user.email, process.env.SECRET_KEY);
 
         user = user.toObject();
+
         delete user.password;
 
         return {
@@ -90,6 +93,6 @@ const userApi = {
       }
     }
   }
-}
+};
 
 module.exports = userApi;
