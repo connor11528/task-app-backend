@@ -25,17 +25,17 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/api/task',
+    path: '/api/tasks',
     options: api.task.all
   },
   {
     method: 'GET',
-    path: '/api/task/{task}',
+    path: '/api/tasks/{task}',
     options: api.task.get
   },
   {
     method: 'POST',
-    path: '/api/task',
+    path: '/api/tasks',
     options: api.task.create
   },
   {
@@ -45,7 +45,7 @@ const routes = [
   },
   {
     method: 'DELETE',
-    path: '/api/task/{task}',
+    path: '/api/tasks/{task}',
     options: api.task.remove
   },
 ];

@@ -66,9 +66,9 @@ const userApi = {
           return Boom.badRequest('No account with that email');
         }
 
-        if(!user.active){
-          return Boom.badRequest('Your account isn\'t activated yet. Check your email!');
-        }
+        // if(!user.active){
+        //   return Boom.badRequest('Your account isn\'t activated yet. Check your email!');
+        // }
 
         const passwordMatch = await utils.comparePassword(password, user.password);
 
