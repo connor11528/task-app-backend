@@ -8,8 +8,7 @@ const userModel = mongoose.Schema({
     index: { unique: true } 
   },
   password: { 
-    type: String, 
-    required: '{PATH} is required!' 
+    type: String
   },
   active: { 
     type: Boolean, 

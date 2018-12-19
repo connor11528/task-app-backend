@@ -37,7 +37,7 @@ const utils = {
 	async sendVerificationEmail(user){
     const token = jsonwebtoken.sign(user.email, process.env.SECRET_KEY);
 
-    const verificationUrl = `${process.env.BASE_URL}/confirmation?token=${token}`;
+    const verificationUrl = `${process.env.BASE_URL}/#/confirmation?token=${token}`;
 
     return await emails.sendEmail(user.email, {
       subject: 'Activate your account',

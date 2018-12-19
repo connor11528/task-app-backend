@@ -17,7 +17,7 @@ const userApi = {
         });
 
         if(existingUser) {
-          return Boom.methodNotAllowed('We already have a user with that email');
+          return Boom.badRequest('We already have a user with that email');
         }
 
         const user = await new User({ email, password });
@@ -26,7 +26,7 @@ const userApi = {
 
         await utils.sendVerificationEmail(user);
 
-        return { message: "User created successfully. Please check your email", user };
+        return { message: "Registration complete! Please check your email to verify your account" };
 
       } catch (err) {
         Boom.badImplementation(err);
