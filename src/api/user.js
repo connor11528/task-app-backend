@@ -1,28 +1,32 @@
 require('dotenv').config();
 
-const utils        = require('../utils');
-const Boom         = require('boom');
+const utils = require('../utils');
+const Boom = require('boom');
 const jsonwebtoken = require('jsonwebtoken');
-const { User }     = require('./../models');
+const {User} = require('./../models');
 
 const userApi = {
   register: {
     auth: false,
     async handler(request, h) {
       try {
-        const { email, password } = request.payload;
+        const {email, password} = request.payload;
 
         const existingUser = await User.findOne({
           email: email
         });
 
-        if(existingUser) {
+        if (existingUser) {
           return Boom.badRequest('We already have a user with that email');
         }
 
-        const user = await new User({ email, password });
+        const user = new User({ email, password });
 
-        user.save();
+        console.log(user);
+
+        await user.save();
+
+        console.log(user);
 
         await utils.sendVerificationEmail(user);
 
@@ -38,19 +42,15 @@ const userApi = {
     async handler(request, h) {
       const token = request.query.token;
 
-      const decodedEmail = jsonwebtoken.verify(token, process.env.SECRET_KEY);
+      const email = jsonwebtoken.verify(token, process.env.SECRET_KEY);
 
-      let user = await User.findOne({
-        email: decodedEmail
-      });
+      let user = await User.findOne({ email });
 
-      if(!user || !token){
+      if (!user || !token) {
         Boom.badRequest('Invalid token');
       }
 
-      user.set({ active: true });
-
-      await user.save();
+      user.update({active: true});
 
       return { success: true, message: 'Account successfully activated!' };
     }
@@ -59,10 +59,10 @@ const userApi = {
     auth: false,
     async handler(request, h) {
       try {
-        const { email, password } = request.payload;
-        let user                  = await User.findOne({ email });
+        const {email, password} = request.payload;
+        let user = await User.findOne({email});
 
-        if(!user){
+        if (!user) {
           return Boom.badRequest('No account with that email');
         }
 
@@ -72,7 +72,7 @@ const userApi = {
 
         const passwordMatch = await utils.comparePassword(password, user.password);
 
-        if(!passwordMatch){
+        if (!passwordMatch) {
           return Boom.badRequest('Password does not match');
         }
 
@@ -88,7 +88,6 @@ const userApi = {
         };
 
       } catch (err) {
-        console.log(err);
         Boom.badImplementation(err);
       }
     }

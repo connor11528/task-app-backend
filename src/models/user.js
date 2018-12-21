@@ -8,7 +8,8 @@ const userModel = mongoose.Schema({
     index: { unique: true } 
   },
   password: { 
-    type: String
+    type: String,
+    default: null
   },
   active: { 
     type: Boolean, 
@@ -18,19 +19,21 @@ const userModel = mongoose.Schema({
   timestamps: true
 });
 
-userModel.pre('save', function(next) {
+userModel.pre('save', (next) => {
   var user = this;
 
-  if (!user.isModified('password')){
+  if (!this.password){
     next();
+  } else {
+    utils.hashPassword(this.password)
+      .then((hash)=>{
+        user.password = hash;
+        next();
+      })
+      .catch(e => console.error(e));
   }
 
-  utils.hashPassword(this.password)
-    .then((hash)=>{
-      user.password = hash;
-      next();
-    })
-    .catch(e => console.error(e));
+
 });
 
 module.exports = mongoose.model('User', userModel);

@@ -11,7 +11,7 @@
   "author": "Connor Leech",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.2",
+    "bcrypt": "3.0.0",
     "bluebird": "^3.5.3",
     "boom": "^7.2.0",
     "dotenv": "^6.1.0",
