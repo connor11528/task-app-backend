@@ -27,7 +27,7 @@ const utils = {
     return new Promise((resolve, reject) => {
       bcrypt.compare(rawPassword, hashedPassword, (error, response) => {
         if (error) {
-          return reject(err);
+          return reject(error);
         }
 
         return resolve(response);

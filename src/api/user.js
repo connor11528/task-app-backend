@@ -10,10 +10,10 @@ const userApi = {
     auth: false,
     async handler(request, h) {
       try {
-        const {email, password} = request.payload;
+        const { email, password } = request.payload;
 
         const existingUser = await User.findOne({
-          email: email
+          email
         });
 
         if (existingUser) {
@@ -22,11 +22,7 @@ const userApi = {
 
         const user = new User({ email, password });
 
-        console.log(user);
-
         await user.save();
-
-        console.log(user);
 
         await utils.sendVerificationEmail(user);
 
@@ -50,7 +46,7 @@ const userApi = {
         Boom.badRequest('Invalid token');
       }
 
-      user.update({active: true});
+      user.update({ active: true });
 
       return { success: true, message: 'Account successfully activated!' };
     }
@@ -60,7 +56,7 @@ const userApi = {
     async handler(request, h) {
       try {
         const {email, password} = request.payload;
-        let user = await User.findOne({email});
+        let user = await User.findOne({ email });
 
         if (!user) {
           return Boom.badRequest('No account with that email');
