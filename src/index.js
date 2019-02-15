@@ -24,7 +24,6 @@ const validate = async function (decoded, request) {
 
 const startServer = async () => {
   try {
-
     await server.register(require('hapi-auth-jwt2'));
 
     server.auth.strategy('jwt', 'jwt', { 
@@ -34,8 +33,6 @@ const startServer = async () => {
         algorithms: [ 'HS256' ] 
       }
     });
-
-    server.auth.default('jwt');
 
     routes.forEach((route)=>{
       server.route(route);

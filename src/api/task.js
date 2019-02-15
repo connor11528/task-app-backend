@@ -14,7 +14,7 @@ const taskApi = {
     }
   },
   create: {
-    auth: 'jwt',
+    // auth: 'jwt',
     async handler(request, h) {
       try {
         const task = await new Task({
@@ -61,10 +61,10 @@ const taskApi = {
     }
   },
   remove: {
-    auth: 'jwt',
+    // auth: 'jwt',
     async handler(request, h){
         try {
-            const task = await Task.findById(request.params.task).remove();
+            await Task.findById(request.params.task).remove();
 
             return { success: true, message: 'Successfully removed task!' };
 
